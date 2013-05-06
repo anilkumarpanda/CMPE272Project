@@ -10,7 +10,7 @@ shinyServer(function(input, output) {
   #  plot(df);
   #})
   
-  data <- read.csv("C:/Users/Saurabh/Downloads/mastersheet.csv")
+  data <- read.csv("mastersheet.csv")
   
   organicPrediction<-function(x,y,z,w){
     if(x=="0"){
