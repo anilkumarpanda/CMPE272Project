@@ -106,10 +106,11 @@ shinyServer(function(input, output) {
     newincome<-w
     newdata<-data.frame(Farmland=newfarm,Rain=newrain,Temperature=newtemp,Income=newincome)
     newsales<-predict(fit,newdata=newdata)
+    newsales<-round(newsales,0)
     Sales<-union(data$Sales,newsales)
     Year<-union(data$Year,c(2013))
     
-    df<-data.frame(X=Year,Y=Sales)
+    df<-data.frame(Year=Year,Sales=Sales)
     return (df)
   }
   
@@ -117,28 +118,28 @@ shinyServer(function(input, output) {
     
     fit <- arima(data$Farmland, order=c(1,0,0), list(order=c(2,1,0), period=1))
     fore <- predict(fit, n.ahead=1)
-    return (fore$pred)
+    return (round(fore$pred,0))
   }
   
   rainTimeSeries<-function(){
     
     fit <- arima(data$Rain, order=c(1,0,0), list(order=c(2,1,0), period=1))
     fore <- predict(fit, n.ahead=1)
-    return (fore$pred)
+    return (round(fore$pred,2))
   }
   
   temperatureTimeSeries<-function(){
    
     fit <- arima(data$Temperature, order=c(1,0,0), list(order=c(2,1,0), period=1))
     fore <- predict(fit, n.ahead=1)
-    return (fore$pred)
+    return (round(fore$pred,2))
   }
   
   incomeTimeSeries<-function(){
    
     fit <- arima(data$Income, order=c(1,0,0), list(order=c(2,1,0), period=1))
     fore <- predict(fit, n.ahead=1)
-    return (fore$pred)
+    return (round(fore$pred,0))
   }
   
   output$View <- renderGvis({
