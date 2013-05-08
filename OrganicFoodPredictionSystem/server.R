@@ -143,7 +143,7 @@ shinyServer(function(input, output) {
   }
   
   output$View <- renderGvis({
-    gvisScatterChart(organicPrediction(input$Farmland,input$Rain,input$Temperature,input$Income),options=list(legend='none', width=1000,height=500))
+    gvisScatterChart(organicPrediction(input$Farmland,input$Rain,input$Temperature,input$Income),options=list(legend='none',title="Organic Sales Prediction",vAxis="{title:'Sales'}",hAxis="{title:'Year'}",width=1000,height=500))
   })
   
 })
